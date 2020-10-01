@@ -94,6 +94,8 @@ public class User extends AbstractEntity implements AuthenticationInfo {
 	
 	public static final String AUTH_SOURCE_SSO_PROVIDER = "SSO Provider: ";
 	
+	public static final String PROP_STATUS = "status";  //用户状态 1：正常； 0：禁用
+	
 	private static ThreadLocal<Stack<User>> stack =  new ThreadLocal<Stack<User>>() {
 
 		@Override
@@ -117,6 +119,8 @@ public class User extends AbstractEntity implements AuthenticationInfo {
 	
 	@Column(unique=true, nullable=false)
 	private String email;
+	
+	private Integer status;
 	
 	@Column(unique=true, nullable=false)
 	private String accessToken = RandomStringUtils.randomAlphanumeric(ACCESS_TOKEN_LEN);
@@ -473,6 +477,14 @@ public class User extends AbstractEntity implements AuthenticationInfo {
 
 	public void setMemberships(Collection<Membership> memberships) {
 		this.memberships = memberships;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
 
 	@Override
