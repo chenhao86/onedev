@@ -55,6 +55,7 @@ import io.onedev.server.util.watch.QuerySubscriptionSupport;
 import io.onedev.server.util.watch.QueryWatchSupport;
 import io.onedev.server.web.editable.annotation.Editable;
 import io.onedev.server.web.editable.annotation.Password;
+import io.onedev.server.web.editable.annotation.Status;
 
 @Entity
 @Table(
@@ -120,7 +121,8 @@ public class User extends AbstractEntity implements AuthenticationInfo {
 	@Column(unique=true, nullable=false)
 	private String email;
 	
-	private Integer status;
+	@Column
+	private Integer status = 1;
 	
 	@Column(unique=true, nullable=false)
 	private String accessToken = RandomStringUtils.randomAlphanumeric(ACCESS_TOKEN_LEN);
@@ -479,6 +481,8 @@ public class User extends AbstractEntity implements AuthenticationInfo {
 		this.memberships = memberships;
 	}
 
+	@Editable(order=400,name = "Status")
+	@Status
 	public Integer getStatus() {
 		return status;
 	}
