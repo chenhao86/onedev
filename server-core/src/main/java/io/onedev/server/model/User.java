@@ -122,7 +122,7 @@ public class User extends AbstractEntity implements AuthenticationInfo {
 	private String email;
 	
 	@Column
-	private Integer status = 1;
+	private boolean status = true;
 	
 	@Column(unique=true, nullable=false)
 	private String accessToken = RandomStringUtils.randomAlphanumeric(ACCESS_TOKEN_LEN);
@@ -481,13 +481,13 @@ public class User extends AbstractEntity implements AuthenticationInfo {
 		this.memberships = memberships;
 	}
 
-	@Editable(order=400,name = "Status")
+	@Editable(order=400,name = "Enable")
 	@Status
-	public Integer getStatus() {
+	public boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus(boolean status) {
 		this.status = status;
 	}
 

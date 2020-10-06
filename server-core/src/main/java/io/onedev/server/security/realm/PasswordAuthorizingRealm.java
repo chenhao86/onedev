@@ -72,7 +72,7 @@ public class PasswordAuthorizingRealm extends AbstractAuthorizingRealm {
 		user.setName(userName);
 		user.setPassword(User.EXTERNAL_MANAGED);
 		user.setEmail(authenticated.getEmail());
-		user.setStatus(1);
+		user.setStatus(true);
 		if (authenticated.getFullName() != null)
 			user.setFullName(authenticated.getFullName());
 		
@@ -142,7 +142,7 @@ public class PasswordAuthorizingRealm extends AbstractAuthorizingRealm {
 		    				throw new AuthenticationException("Account '" + userName + "' is set to authenticate "
 		    						+ "externally but " + User.AUTH_SOURCE_EXTERNAL_AUTHENTICATOR + " is not defined");
 		    			}
-			    	}else if(null == user.getStatus() || user.getStatus() != 1) {
+			    	}else if(!user.getStatus() ) {
 			    		throw new AuthenticationException("Account '" + userName + "' is locked.");
 			    	}
 			    	return user;
